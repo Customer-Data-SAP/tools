@@ -3,449 +3,707 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Customer Data – Tools &amp; APIs</title>
+  <title>Customer Data – Internal Tools</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <style>
-    /* ── Fiori Horizon tokens ── */
+    /* ── Design tokens ── */
     :root {
-      --sapShellColor:           #354A5E;
-      --sapShellTextColor:       #FFFFFF;
-      --sapPageHeaderBackground: #FFFFFF;
-      --sapBackgroundColor:      #F5F6F7;
-      --sapBaseColor:            #FFFFFF;
-      --sapBorderColor:          #D9DBDD;
-      --sapTextColor:            #1D2D3E;
-      --sapContent_LabelColor:   #556B82;
-      --sapNeutralColor:         #8696A9;
-      --sapHighlightColor:       #0070F2;
-      --sapHighlightBackground:  #E8F3FF;
-      --sapCriticalColor:        #E76500;
-      --sapPositiveColor:        #188918;
-      --sapFontFamily:           "72", "72full", Arial, Helvetica, sans-serif;
-      --sapFontSize:             0.875rem;
-      --sapFontSmallSize:        0.75rem;
-      --sapFontLargeSize:        1rem;
-      --sapContent_GridGap:      1rem;
-      --radius-tile:             0.5rem;
-      --shell-height:            2.75rem;
+      --c-bg:          #F2F4F7;
+      --c-surface:     #FFFFFF;
+      --c-border:      #DDE2E8;
+      --c-border-mid:  #C8CDD6;
+      --c-text-1:      #111827;
+      --c-text-2:      #4B5563;
+      --c-text-3:      #9CA3AF;
+      --c-brand:       #0057B8;
+      --c-brand-dim:   #EFF6FF;
+      --c-green:       #15803D;
+      --c-green-dim:   #F0FDF4;
+      --c-amber:       #B45309;
+      --c-amber-dim:   #FFFBEB;
+      --c-slate:       #475569;
+      --c-slate-dim:   #F8FAFC;
+      --r-sm:          4px;
+      --r-md:          6px;
+      --r-lg:          8px;
+      --shadow-card:   0 1px 2px rgba(0,0,0,0.05), 0 1px 4px rgba(0,0,0,0.04);
+      --shadow-hover:  0 4px 16px rgba(0,0,0,0.08), 0 1px 4px rgba(0,0,0,0.04);
+      --font:          "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      --font-mono:     "SF Mono", "Fira Code", "Fira Mono", ui-monospace, monospace;
     }
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     body {
-      font-family: var(--sapFontFamily);
-      font-size: var(--sapFontSize);
-      background: var(--sapBackgroundColor);
-      color: var(--sapTextColor);
+      font-family: var(--font);
+      font-size: 14px;
+      line-height: 1.5;
+      background: var(--c-bg);
+      color: var(--c-text-1);
+      -webkit-font-smoothing: antialiased;
       min-height: 100vh;
     }
 
-    /* ── Shell Bar ── */
-    .fd-shell__header {
-      background: linear-gradient(100deg, #0D3068 0%, #0057B8 55%, #1B8EF2 100%);
-      height: 3.5rem;
+    /* ────────────────────────────
+       SHELL BAR
+    ──────────────────────────── */
+    .shell {
+      height: 52px;
+      background: linear-gradient(90deg, #071830 0%, #0C2D5E 38%, #0057B8 76%, #1270D4 100%);
       display: flex;
       align-items: center;
-      padding: 0 1.5rem;
-      gap: 0.75rem;
-      box-shadow: 0 2px 8px rgba(0,80,180,0.3);
+      padding: 0 24px;
+      gap: 12px;
       position: sticky;
       top: 0;
-      z-index: 200;
+      z-index: 100;
+      box-shadow: 0 1px 0 rgba(255,255,255,0.05), 0 2px 8px rgba(7,24,48,0.45);
     }
 
-    .fd-shell__logo {
-      height: 2.5rem;
-      display: flex;
-      align-items: center;
-    }
-
-    .fd-shell__logo img {
-      height: 2.25rem;
+    .shell-logo img {
+      height: 32px;
       width: auto;
+      display: block;
     }
 
-    .fd-shell__separator {
+    .shell-divider {
       width: 1px;
-      height: 1.25rem;
-      background: rgba(255,255,255,0.3);
+      height: 16px;
+      background: rgba(255,255,255,0.2);
       flex-shrink: 0;
     }
 
-    .fd-shell__product-name {
-      font-size: var(--sapFontSize);
+    .shell-app {
+      font-size: 13px;
+      font-weight: 600;
+      color: rgba(255,255,255,0.95);
+      letter-spacing: 0.01em;
+    }
+
+    .shell-spacer { flex: 1; }
+
+    .shell-tags {
+      display: flex;
+      gap: 6px;
+    }
+
+    .shell-tag {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.025em;
+      color: rgba(255,255,255,0.58);
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 20px;
+      padding: 2px 10px;
+    }
+
+    /* ────────────────────────────
+       PAGE HEADER
+    ──────────────────────────── */
+    .page-head {
+      background: var(--c-surface);
+      border-bottom: 1px solid var(--c-border);
+      padding: 22px 24px 18px;
+    }
+
+    .page-head-inner {
+      max-width: 1160px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .page-head h1 {
+      font-size: 18px;
       font-weight: 700;
-      color: var(--sapShellTextColor);
+      color: var(--c-text-1);
+      letter-spacing: -0.02em;
+    }
+
+    .page-head p {
+      font-size: 13px;
+      color: var(--c-text-2);
+      margin-top: 2px;
+    }
+
+    .search-wrap {
+      position: relative;
+      width: 256px;
+      flex-shrink: 0;
+    }
+
+    .search-wrap input {
+      width: 100%;
+      height: 32px;
+      border: 1px solid var(--c-border-mid);
+      border-radius: var(--r-md);
+      padding: 0 10px 0 32px;
+      font-family: var(--font);
+      font-size: 13px;
+      color: var(--c-text-1);
+      background: var(--c-surface);
+      outline: none;
+      transition: border-color 0.15s, box-shadow 0.15s;
+    }
+
+    .search-wrap input::placeholder { color: var(--c-text-3); }
+
+    .search-wrap input:focus {
+      border-color: var(--c-brand);
+      box-shadow: 0 0 0 3px rgba(0,87,184,0.1);
+    }
+
+    .search-icon {
+      position: absolute;
+      left: 9px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--c-text-3);
+      pointer-events: none;
+    }
+
+    /* ────────────────────────────
+       STATUS BAR
+    ──────────────────────────── */
+    .status-bar {
+      background: var(--c-surface);
+      border-bottom: 1px solid var(--c-border);
+      padding: 8px 24px;
+    }
+
+    .status-bar-inner {
+      max-width: 1160px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .status-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      color: var(--c-text-2);
+    }
+
+    .status-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .dot-green { background: #16A34A; }
+    .dot-blue  { background: var(--c-brand); }
+
+    .status-item b {
+      font-weight: 600;
+      color: var(--c-text-1);
+    }
+
+    /* ────────────────────────────
+       CONTENT
+    ──────────────────────────── */
+    .content {
+      max-width: 1160px;
+      margin: 0 auto;
+      padding: 28px 24px 64px;
+    }
+
+    /* ────────────────────────────
+       SECTION
+    ──────────────────────────── */
+    .section { margin-bottom: 32px; }
+
+    .section-head {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+
+    .section-label {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+      color: var(--c-text-3);
       white-space: nowrap;
     }
 
-    .fd-shell__spacer { flex: 1; }
-
-    .fd-shell__tags {
-      display: flex;
-      gap: 0.5rem;
-    }
-
-    .fd-shell__tag {
-      font-size: 0.6875rem;
+    .section-count {
+      font-size: 11px;
       font-weight: 600;
-      letter-spacing: 0.04em;
-      color: rgba(255,255,255,0.75);
-      background: rgba(255,255,255,0.12);
-      border: 1px solid rgba(255,255,255,0.2);
-      border-radius: 0.75rem;
-      padding: 0.1875rem 0.625rem;
+      color: var(--c-text-3);
+      background: #F3F4F6;
+      border-radius: 10px;
+      padding: 1px 7px;
     }
 
-    /* ── Page Header ── */
-    .fd-page-header {
-      background: var(--sapPageHeaderBackground);
-      border-bottom: 1px solid var(--sapBorderColor);
-      padding: 1.25rem 2rem 1rem;
-    }
-
-    .fd-page-header__title {
-      font-size: 1.25rem;
-      font-weight: 700;
-      color: var(--sapTextColor);
-    }
-
-    .fd-page-header__subtitle {
-      font-size: var(--sapFontSmallSize);
-      color: var(--sapContent_LabelColor);
-      margin-top: 0.25rem;
-    }
-
-    /* ── Page Content ── */
-    .fd-page {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 1.5rem 2rem 3rem;
-    }
-
-    /* ── Section ── */
-    .fd-section {
-      margin-bottom: 2rem;
-    }
-
-    .fd-section__header {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      margin-bottom: 0.75rem;
-    }
-
-    .fd-section__title {
-      font-size: var(--sapFontSmallSize);
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      color: var(--sapContent_LabelColor);
-    }
-
-    .fd-section__rule {
+    .section-rule {
       flex: 1;
       height: 1px;
-      background: var(--sapBorderColor);
+      background: var(--c-border);
     }
 
-    /* ── Tile Grid ── */
-    .fd-tile-container {
+    /* ────────────────────────────
+       GRID
+    ──────────────────────────── */
+    .grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(17rem, 1fr));
-      gap: var(--sapContent_GridGap);
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 10px;
     }
 
-    /* ── Tile ── */
-    .fd-tile {
-      background: var(--sapBaseColor);
-      border: 1px solid var(--sapBorderColor);
-      border-radius: var(--radius-tile);
-      padding: 1rem 1.25rem 1rem;
+    /* ────────────────────────────
+       CARD
+    ──────────────────────────── */
+    .card {
+      background: var(--c-surface);
+      border: 1px solid var(--c-border);
+      border-radius: var(--r-lg);
+      padding: 16px 18px;
       text-decoration: none;
       color: inherit;
       display: flex;
       flex-direction: column;
-      gap: 0.5rem;
-      min-height: 8rem;
-      position: relative;
-      overflow: hidden;
-      transition: box-shadow 0.15s, border-color 0.15s;
-      cursor: pointer;
+      gap: 7px;
+      box-shadow: var(--shadow-card);
+      transition: border-color 0.15s, box-shadow 0.15s, transform 0.15s;
     }
 
-    .fd-tile:hover {
-      box-shadow: 0 0 0 2px var(--sapHighlightColor);
-      border-color: var(--sapHighlightColor);
+    .card:hover {
+      border-color: #93C5FD;
+      box-shadow: var(--shadow-hover);
+      transform: translateY(-1px);
     }
 
-    .fd-tile__header {
-      display: flex;
-      align-items: flex-start;
-      justify-content: space-between;
-      gap: 0.5rem;
+    .card:focus-visible {
+      outline: 2px solid var(--c-brand);
+      outline-offset: 2px;
     }
 
-    .fd-tile__flag {
-      font-size: 1.375rem;
-      line-height: 1;
-    }
-
-    .fd-tile__badge {
-      font-size: 0.625rem;
-      font-weight: 700;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      padding: 0.1875rem 0.5rem;
-      border-radius: 0.25rem;
-    }
-
-    .fd-tile__badge--api    { background: var(--sapHighlightBackground); color: var(--sapHighlightColor); }
-    .fd-tile__badge--tool   { background: #FEF0E0; color: var(--sapCriticalColor); }
-    .fd-tile__badge--portal { background: #EDFCED; color: var(--sapPositiveColor); }
-
-    .fd-tile__title {
-      font-size: var(--sapFontLargeSize);
-      font-weight: 700;
-      color: var(--sapTextColor);
-      line-height: 1.3;
-    }
-
-    .fd-tile__description {
-      font-size: var(--sapFontSmallSize);
-      color: var(--sapContent_LabelColor);
-      line-height: 1.5;
-      flex: 1;
-    }
-
-    .fd-tile__footer {
-      margin-top: auto;
-      padding-top: 0.625rem;
-      border-top: 1px solid #EEEFF0;
+    /* Card row 1: flag + category + status */
+    .card-row1 {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 0.5rem;
     }
 
-    .fd-tile__url {
-      font-size: 0.6875rem;
-      color: var(--sapNeutralColor);
+    .card-left {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .card-flag { font-size: 17px; line-height: 1; }
+
+    .card-cat {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      padding: 2px 7px;
+      border-radius: var(--r-sm);
+    }
+
+    .cat-api    { background: #EFF6FF; color: #1D4ED8; }
+    .cat-tool   { background: #FFF7ED; color: #C2410C; }
+    .cat-portal { background: #F0FDF4; color: #15803D; }
+
+    .card-status {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--c-green);
+    }
+
+    .card-status-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: currentColor;
+      flex-shrink: 0;
+    }
+
+    .status-beta   { color: var(--c-amber); }
+    .status-legacy { color: var(--c-slate); }
+
+    /* Card row 2: title */
+    .card-title {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--c-text-1);
+      line-height: 1.3;
+    }
+
+    /* Card row 3: desc */
+    .card-desc {
+      font-size: 12.5px;
+      color: var(--c-text-2);
+      line-height: 1.6;
+      flex: 1;
+    }
+
+    /* Card footer */
+    .card-foot {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      margin-top: 6px;
+      padding-top: 10px;
+      border-top: 1px solid #F3F4F6;
+    }
+
+    .card-url {
+      font-family: var(--font-mono);
+      font-size: 10.5px;
+      color: var(--c-text-3);
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
     }
 
-    .fd-tile__arrow {
+    .card-cta {
       flex-shrink: 0;
-      width: 1.5rem;
-      height: 1.5rem;
-      border-radius: 50%;
-      background: var(--sapHighlightBackground);
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--c-brand);
+      white-space: nowrap;
+      transition: gap 0.15s;
+    }
+
+    .card:hover .card-cta { gap: 6px; }
+
+    .card-cta svg {
+      width: 11px;
+      height: 11px;
+      stroke: currentColor;
+    }
+
+    /* ────────────────────────────
+       NO RESULTS
+    ──────────────────────────── */
+    .no-results {
+      display: none;
+      padding: 48px 0;
+      text-align: center;
+      font-size: 13px;
+      color: var(--c-text-3);
+    }
+
+    .card[data-hidden] { display: none; }
+
+    /* ────────────────────────────
+       FOOTER
+    ──────────────────────────── */
+    .page-footer {
+      border-top: 1px solid var(--c-border);
+      padding: 16px 24px;
+      text-align: center;
+      font-size: 11.5px;
+      color: var(--c-text-3);
+    }
+
+    .page-footer-team {
+      margin-top: 6px;
       display: flex;
       align-items: center;
       justify-content: center;
-      transition: background 0.15s;
+      gap: 20px;
+      flex-wrap: wrap;
     }
 
-    .fd-tile:hover .fd-tile__arrow {
-      background: var(--sapHighlightColor);
+    .team-member {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 11px;
+      color: var(--c-text-3);
     }
 
-    .fd-tile__arrow svg {
-      width: 0.75rem;
-      height: 0.75rem;
-      stroke: var(--sapHighlightColor);
-      transition: stroke 0.15s;
+    .team-member b {
+      font-weight: 600;
+      color: var(--c-text-2);
     }
 
-    .fd-tile:hover .fd-tile__arrow svg {
-      stroke: #fff;
+    .team-flag {
+      font-size: 12px;
     }
 
-    /* ── Footer ── */
-    .fd-footer {
-      border-top: 1px solid var(--sapBorderColor);
-      text-align: center;
-      padding: 1rem;
-      font-size: var(--sapFontSmallSize);
-      color: var(--sapNeutralColor);
-    }
-
-    /* ── Responsive ── */
-    @media (max-width: 600px) {
-      .fd-page { padding: 1rem 1rem 2rem; }
-      .fd-page-header { padding: 1rem 1rem 0.75rem; }
-      .fd-shell__tags { display: none; }
+    /* ────────────────────────────
+       RESPONSIVE
+    ──────────────────────────── */
+    @media (max-width: 640px) {
+      .shell { padding: 0 16px; }
+      .shell-tags { display: none; }
+      .page-head-inner { flex-direction: column; align-items: flex-start; }
+      .search-wrap { width: 100%; }
+      .status-bar { display: none; }
+      .content { padding: 20px 16px 48px; }
     }
   </style>
 </head>
 <body>
 
 <!-- Shell Bar -->
-<div class="fd-shell__header">
-  <div class="fd-shell__logo">
+<header class="shell">
+  <div class="shell-logo">
     <img src="logo_transparent.png" alt="SAP" />
   </div>
-  <div class="fd-shell__separator"></div>
-  <span class="fd-shell__product-name">Customer Data</span>
-  <div class="fd-shell__spacer"></div>
-  <div class="fd-shell__tags">
-    <span class="fd-shell__tag">Latin America</span>
-    <span class="fd-shell__tag">Internal</span>
+  <div class="shell-divider"></div>
+  <span class="shell-app">Customer Data – Digital Hub</span>
+  <div class="shell-spacer"></div>
+  <div class="shell-tags">
+    <span class="shell-tag">Latin America</span>
+    <span class="shell-tag">Internal</span>
   </div>
-</div>
+</header>
 
 <!-- Page Header -->
-<div class="fd-page-header">
-  <div class="fd-page-header__title">Tools &amp; API Directory</div>
-  <div class="fd-page-header__subtitle">Centralized access to all Customer Data team tools and APIs</div>
+<div class="page-head">
+  <div class="page-head-inner">
+    <div>
+      <h1>Internal Tools &amp; API Directory</h1>
+      <p>Centralized access to data tools, APIs and operational portals used by the Customer Data team.</p>
+    </div>
+    <div class="search-wrap">
+      <svg class="search-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+      <input type="search" id="search" placeholder="Search tools and APIs…" autocomplete="off" aria-label="Search tools and APIs" />
+    </div>
+  </div>
 </div>
 
-<!-- Content -->
-<div class="fd-page">
+<!-- Status Bar -->
+<div class="status-bar" aria-label="Summary">
+  <div class="status-bar-inner">
+    <div class="status-item">
+      <span class="status-dot dot-green"></span>
+      <span><b>4</b> APIs</span>
+    </div>
+    <div class="status-item">
+      <span class="status-dot dot-blue"></span>
+      <span><b>5</b> Tools &amp; Portals</span>
+    </div>
+    <div class="status-item">
+      <span class="status-dot dot-green"></span>
+      <span>All systems operational</span>
+    </div>
+  </div>
+</div>
+
+<!-- Main Content -->
+<main class="content">
 
   <!-- APIs -->
-  <div class="fd-section">
-    <div class="fd-section__header">
-      <span class="fd-section__title">APIs</span>
-      <div class="fd-section__rule"></div>
+  <section class="section" aria-labelledby="heading-apis">
+    <div class="section-head">
+      <span class="section-label" id="heading-apis">APIs</span>
+      <span class="section-count" aria-hidden="true">4</span>
+      <div class="section-rule"></div>
     </div>
-    <div class="fd-tile-container">
+    <div class="grid">
 
-      <a class="fd-tile" href="https://sii-chile-api.cfapps.us10.hana.ondemand.com/app/" target="_blank" rel="noopener">
-        <div class="fd-tile__header">
-          <span class="fd-tile__flag">🇨🇱</span>
-          <span class="fd-tile__badge fd-tile__badge--api">API</span>
-        </div>
-        <div class="fd-tile__title">API Chile</div>
-        <div class="fd-tile__description">Tax identity validation via SII — Servicio de Impuestos Internos.</div>
-        <div class="fd-tile__footer">
-          <span class="fd-tile__url">sii-chile-api.cfapps.us10.hana.ondemand.com</span>
-          <div class="fd-tile__arrow">
-            <svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      <a class="card" href="https://api-argentina.cfapps.us10.hana.ondemand.com/app/" target="_blank" rel="noopener" data-search="api argentina afip tax identity">
+        <div class="card-row1">
+          <div class="card-left">
+            <span class="card-cat cat-api">API</span>
           </div>
+          <div class="card-status" role="status"><span class="card-status-dot" aria-hidden="true"></span>Available</div>
+        </div>
+        <div class="card-title">API Argentina</div>
+        <div class="card-desc">Tax identity and business data validation via AFIP — Administración Federal de Ingresos Públicos.</div>
+        <div class="card-foot">
+          <span class="card-url" aria-hidden="true">api-argentina.cfapps.us10.hana.ondemand.com</span>
+          <span class="card-cta" aria-label="Open API Argentina">Open <svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
         </div>
       </a>
 
-      <a class="fd-tile" href="https://sunat-peru-api.cfapps.us10.hana.ondemand.com/app/" target="_blank" rel="noopener">
-        <div class="fd-tile__header">
-          <span class="fd-tile__flag">🇵🇪</span>
-          <span class="fd-tile__badge fd-tile__badge--api">API</span>
-        </div>
-        <div class="fd-tile__title">API Peru</div>
-        <div class="fd-tile__description">Taxpayer and business data validation via SUNAT.</div>
-        <div class="fd-tile__footer">
-          <span class="fd-tile__url">sunat-peru-api.cfapps.us10.hana.ondemand.com</span>
-          <div class="fd-tile__arrow">
-            <svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      <a class="card" href="https://sii-chile-api.cfapps.us10.hana.ondemand.com/app/" target="_blank" rel="noopener" data-search="api chile sii tax identity">
+        <div class="card-row1">
+          <div class="card-left">
+            <span class="card-cat cat-api">API</span>
           </div>
+          <div class="card-status" role="status"><span class="card-status-dot" aria-hidden="true"></span>Available</div>
+        </div>
+        <div class="card-title">API Chile</div>
+        <div class="card-desc">Tax identity validation via SII — Servicio de Impuestos Internos.</div>
+        <div class="card-foot">
+          <span class="card-url" aria-hidden="true">sii-chile-api.cfapps.us10.hana.ondemand.com</span>
+          <span class="card-cta" aria-label="Open API Chile">Open <svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
         </div>
       </a>
 
-      <a class="fd-tile" href="https://camara-colombia-api.cfapps.us10.hana.ondemand.com/app/" target="_blank" rel="noopener">
-        <div class="fd-tile__header">
-          <span class="fd-tile__flag">🇨🇴</span>
-          <span class="fd-tile__badge fd-tile__badge--api">API</span>
-        </div>
-        <div class="fd-tile__title">API Colombia</div>
-        <div class="fd-tile__description">Company registry lookup via Cámara de Comercio de Colombia.</div>
-        <div class="fd-tile__footer">
-          <span class="fd-tile__url">camara-colombia-api.cfapps.us10.hana.ondemand.com</span>
-          <div class="fd-tile__arrow">
-            <svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      <a class="card" href="https://sunat-peru-api.cfapps.us10.hana.ondemand.com/app/" target="_blank" rel="noopener" data-search="api peru sunat taxpayer business">
+        <div class="card-row1">
+          <div class="card-left">
+            <span class="card-cat cat-api">API</span>
           </div>
+          <div class="card-status" role="status"><span class="card-status-dot" aria-hidden="true"></span>Available</div>
+        </div>
+        <div class="card-title">API Peru</div>
+        <div class="card-desc">Taxpayer and business data validation via SUNAT.</div>
+        <div class="card-foot">
+          <span class="card-url" aria-hidden="true">sunat-peru-api.cfapps.us10.hana.ondemand.com</span>
+          <span class="card-cta" aria-label="Open API Peru">Open <svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+        </div>
+      </a>
+
+      <a class="card" href="https://camara-colombia-api.cfapps.us10.hana.ondemand.com/app/" target="_blank" rel="noopener" data-search="api colombia camara comercio company registry">
+        <div class="card-row1">
+          <div class="card-left">
+            <span class="card-cat cat-api">API</span>
+          </div>
+          <div class="card-status" role="status"><span class="card-status-dot" aria-hidden="true"></span>Available</div>
+        </div>
+        <div class="card-title">API Colombia</div>
+        <div class="card-desc">Company registry lookup via Cámara de Comercio de Colombia.</div>
+        <div class="card-foot">
+          <span class="card-url" aria-hidden="true">camara-colombia-api.cfapps.us10.hana.ondemand.com</span>
+          <span class="card-cta" aria-label="Open API Colombia">Open <svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
         </div>
       </a>
 
     </div>
-  </div>
+  </section>
 
   <!-- Tools & Portals -->
-  <div class="fd-section">
-    <div class="fd-section__header">
-      <span class="fd-section__title">Tools &amp; Portals</span>
-      <div class="fd-section__rule"></div>
+  <section class="section" aria-labelledby="heading-tools">
+    <div class="section-head">
+      <span class="section-label" id="heading-tools">Tools &amp; Portals</span>
+      <span class="section-count" aria-hidden="true">5</span>
+      <div class="section-rule"></div>
     </div>
-    <div class="fd-tile-container">
+    <div class="grid">
 
-      <a class="fd-tile" href="https://email-validator.cfapps.us10.hana.ondemand.com" target="_blank" rel="noopener">
-        <div class="fd-tile__header">
-          <span class="fd-tile__badge fd-tile__badge--tool">Tool</span>
-        </div>
-        <div class="fd-tile__title">Email Validator</div>
-        <div class="fd-tile__description">Validate and verify email addresses for customer data quality.</div>
-        <div class="fd-tile__footer">
-          <span class="fd-tile__url">email-validator.cfapps.us10.hana.ondemand.com</span>
-          <div class="fd-tile__arrow">
-            <svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      <a class="card" href="https://email-validator.cfapps.us10.hana.ondemand.com" target="_blank" rel="noopener" data-search="email validator data quality verify">
+        <div class="card-row1">
+          <div class="card-left">
+            <span class="card-cat cat-tool">Tool</span>
           </div>
+          <div class="card-status" role="status"><span class="card-status-dot" aria-hidden="true"></span>Available</div>
+        </div>
+        <div class="card-title">Email Validator</div>
+        <div class="card-desc">Validate and verify email addresses for customer data quality assurance.</div>
+        <div class="card-foot">
+          <span class="card-url" aria-hidden="true">email-validator.cfapps.us10.hana.ondemand.com</span>
+          <span class="card-cta" aria-label="Open Email Validator">Open <svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
         </div>
       </a>
 
-      <a class="fd-tile" href="https://customer-office-portal.cfapps.us10.hana.ondemand.com" target="_blank" rel="noopener">
-        <div class="fd-tile__header">
-          <span class="fd-tile__badge fd-tile__badge--portal">Portal</span>
-        </div>
-        <div class="fd-tile__title">Customer Office Portal</div>
-        <div class="fd-tile__description">Central operations portal for the Customer Data team.</div>
-        <div class="fd-tile__footer">
-          <span class="fd-tile__url">customer-office-portal.cfapps.us10.hana.ondemand.com</span>
-          <div class="fd-tile__arrow">
-            <svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      <a class="card" href="https://customer-office-portal.cfapps.us10.hana.ondemand.com" target="_blank" rel="noopener" data-search="customer office portal operations team">
+        <div class="card-row1">
+          <div class="card-left">
+            <span class="card-cat cat-portal">Portal</span>
           </div>
+          <div class="card-status" role="status"><span class="card-status-dot" aria-hidden="true"></span>Available</div>
+        </div>
+        <div class="card-title">Customer Office Portal</div>
+        <div class="card-desc">Central operations portal for the Customer Data team.</div>
+        <div class="card-foot">
+          <span class="card-url" aria-hidden="true">customer-office-portal.cfapps.us10.hana.ondemand.com</span>
+          <span class="card-cta" aria-label="Open Customer Office Portal">Open <svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
         </div>
       </a>
 
-      <a class="fd-tile" href="https://digital-hub-frontend.cfapps.eu01-canary.hana.ondemand.com" target="_blank" rel="noopener">
-        <div class="fd-tile__header">
-          <span class="fd-tile__badge fd-tile__badge--portal">Portal</span>
-        </div>
-        <div class="fd-tile__title">Digital Hub</div>
-        <div class="fd-tile__description">Centralized hub for SAP ecosystem resources and integrations.</div>
-        <div class="fd-tile__footer">
-          <span class="fd-tile__url">digital-hub-frontend.cfapps.eu01-canary.hana.ondemand.com</span>
-          <div class="fd-tile__arrow">
-            <svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      <a class="card" href="https://digital-hub-frontend.cfapps.us10.hana.ondemand.com" target="_blank" rel="noopener" data-search="digital hub sap ecosystem integrations resources">
+        <div class="card-row1">
+          <div class="card-left">
+            <span class="card-cat cat-portal">Portal</span>
           </div>
+          <div class="card-status" role="status"><span class="card-status-dot" aria-hidden="true"></span>Available</div>
+        </div>
+        <div class="card-title">Digital Hub</div>
+        <div class="card-desc">Centralized hub for SAP ecosystem resources and integrations.</div>
+        <div class="card-foot">
+          <span class="card-url" aria-hidden="true">digital-hub-frontend.cfapps.us10.hana.ondemand.com</span>
+          <span class="card-cta" aria-label="Open Digital Hub">Open <svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
         </div>
       </a>
 
-      <a class="fd-tile" href="https://sdes-news-frontend.cfapps.eu01-canary.hana.ondemand.com" target="_blank" rel="noopener">
-        <div class="fd-tile__header">
-          <span class="fd-tile__badge fd-tile__badge--portal">Portal</span>
-        </div>
-        <div class="fd-tile__title">SDES News</div>
-        <div class="fd-tile__description">News, updates and announcements from the SDES team.</div>
-        <div class="fd-tile__footer">
-          <span class="fd-tile__url">sdes-news-frontend.cfapps.eu01-canary.hana.ondemand.com</span>
-          <div class="fd-tile__arrow">
-            <svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      <a class="card" href="https://sdes-news-frontend.cfapps.eu01-canary.hana.ondemand.com" target="_blank" rel="noopener" data-search="sdes news updates announcements team">
+        <div class="card-row1">
+          <div class="card-left">
+            <span class="card-cat cat-portal">Portal</span>
           </div>
+          <div class="card-status" role="status"><span class="card-status-dot" aria-hidden="true"></span>Available</div>
+        </div>
+        <div class="card-title">SDES News</div>
+        <div class="card-desc">News, updates and announcements from the SDES team.</div>
+        <div class="card-foot">
+          <span class="card-url" aria-hidden="true">sdes-news-frontend.cfapps.eu01-canary.hana.ondemand.com</span>
+          <span class="card-cta" aria-label="Open SDES News">Open <svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
         </div>
       </a>
 
-      <a class="fd-tile" href="https://sap-check-urls.cfapps.us10.hana.ondemand.com" target="_blank" rel="noopener">
-        <div class="fd-tile__header">
-          <span class="fd-tile__badge fd-tile__badge--tool">Tool</span>
-        </div>
-        <div class="fd-tile__title">SAP Check URLs</div>
-        <div class="fd-tile__description">Monitor availability and health of SAP service endpoints.</div>
-        <div class="fd-tile__footer">
-          <span class="fd-tile__url">sap-check-urls.cfapps.us10.hana.ondemand.com</span>
-          <div class="fd-tile__arrow">
-            <svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      <a class="card" href="https://sap-check-urls.cfapps.us10.hana.ondemand.com" target="_blank" rel="noopener" data-search="check urls monitor availability health endpoints sap">
+        <div class="card-row1">
+          <div class="card-left">
+            <span class="card-cat cat-tool">Tool</span>
           </div>
+          <div class="card-status" role="status"><span class="card-status-dot" aria-hidden="true"></span>Available</div>
+        </div>
+        <div class="card-title">SAP Check URLs</div>
+        <div class="card-desc">Monitor availability and health of SAP service endpoints.</div>
+        <div class="card-foot">
+          <span class="card-url" aria-hidden="true">sap-check-urls.cfapps.us10.hana.ondemand.com</span>
+          <span class="card-cta" aria-label="Open SAP Check URLs">Open <svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
         </div>
       </a>
 
     </div>
+  </section>
+
+  <div class="no-results" id="no-results" role="status" aria-live="polite">
+    No tools matched your search.
   </div>
 
-</div>
+</main>
 
-<div class="fd-footer">
+<footer class="page-footer">
   SAP Customer Data &nbsp;&middot;&nbsp; Internal use only &nbsp;&middot;&nbsp; Latin America
-</div>
+  <div class="page-footer-team">
+    <span class="team-member"><span class="team-flag">🇧🇷</span> <b>Polline Faria</b> &middot; BR</span>
+    <span class="team-member"><span class="team-flag">🇦🇷</span> <b>Mariano Alcobendas</b> &middot; AR</span>
+    <span class="team-member"><span class="team-flag">🇦🇷</span> <b>Valentina Navarro</b> &middot; AR</span>
+    <span class="team-member"><span class="team-flag">🇧🇷</span> <b>Juliane Oliveira</b> &middot; BR</span>
+  </div>
+</footer>
+
+<script>
+  const input = document.getElementById('search');
+  const cards = document.querySelectorAll('.card');
+  const noResults = document.getElementById('no-results');
+
+  input.addEventListener('input', () => {
+    const q = input.value.toLowerCase().trim();
+    let count = 0;
+    cards.forEach(card => {
+      const haystack = [
+        card.dataset.search,
+        card.querySelector('.card-title').textContent,
+        card.querySelector('.card-desc').textContent
+      ].join(' ').toLowerCase();
+
+      const match = !q || haystack.includes(q);
+      card.toggleAttribute('data-hidden', !match);
+      if (match) count++;
+    });
+    noResults.style.display = count === 0 ? 'block' : 'none';
+  });
+</script>
 
 </body>
 </html>
