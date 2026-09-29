@@ -200,6 +200,8 @@
     .dot-green   { background: #16a34a; box-shadow: 0 0 5px rgba(22,163,74,0.4); }
     .dot-violet  { background: var(--sap-violet); box-shadow: 0 0 5px rgba(91,35,200,0.4); }
     .dot-magenta { background: var(--sap-magenta); box-shadow: 0 0 5px rgba(192,48,200,0.4); }
+    .dot-orange  { background: #d97706; box-shadow: 0 0 5px rgba(217,119,6,0.4); }
+    .dot-blue    { background: #1d4ed8; box-shadow: 0 0 5px rgba(29,78,216,0.4); }
     .stat-item b { font-weight: 700; color: var(--text); }
 
     /* ── CONTENT ── */
@@ -297,10 +299,19 @@
     .cat-intel  { background: #fdf4ff; color: #86198f; border: 1px solid rgba(134,25,143,0.18); }
     .cat-docs   { background: var(--bg-purple); color: var(--sap-violet); border: 1px solid rgba(91,35,200,0.25); }
 
+    .card-audience {
+      font-size: 0.6rem; font-weight: 600; letter-spacing: 0.06em;
+      text-transform: uppercase; padding: 2px 8px;
+      border-radius: 4px;
+      background: #f0f9ff; color: #0369a1; border: 1px solid rgba(3,105,161,0.2);
+    }
+
     .card-status {
       display: flex; align-items: center; gap: 5px;
       font-size: 0.7rem; font-weight: 500; color: #15803d;
     }
+    .card-status.on-hold   { color: #b45309; }
+    .card-status.in-progress { color: #1d4ed8; }
     .card-status-dot {
       width: 6px; height: 6px; border-radius: 50%;
       background: currentColor; flex-shrink: 0;
@@ -466,7 +477,7 @@
 
       <a class="card card-doc" href="https://latam-portfolio-approuter.cfapps.us10.hana.ondemand.com" target="_blank" rel="noopener" data-search="documentation docs api reference latam portfolio endpoints parameters">
         <div class="card-row1">
-          <div class="card-left"><span class="card-cat cat-docs">Docs</span></div>
+          <div class="card-left"><span class="card-cat cat-docs">Docs</span><span class="card-audience">Data Team</span></div>
           <div class="card-status" role="status"><span class="card-status-dot" aria-hidden="true"></span>Available</div>
         </div>
         <div class="card-title">API Documentation</div>
@@ -491,7 +502,7 @@
 
       <a class="card" href="https://api-argentina.cfapps.us10.hana.ondemand.com/app/" target="_blank" rel="noopener" data-search="api argentina afip tax identity">
         <div class="card-row1">
-          <div class="card-left"><span class="card-cat cat-api">API</span></div>
+          <div class="card-left"><span class="card-cat cat-api">API</span><span class="card-audience">Everyone</span></div>
           <div class="card-status" role="status"><span class="card-status-dot" aria-hidden="true"></span>Available</div>
         </div>
         <div class="card-title">API Argentina</div>
@@ -504,7 +515,7 @@
 
       <a class="card" href="https://sii-chile-api.cfapps.us10.hana.ondemand.com/app/" target="_blank" rel="noopener" data-search="api chile sii tax identity">
         <div class="card-row1">
-          <div class="card-left"><span class="card-cat cat-api">API</span></div>
+          <div class="card-left"><span class="card-cat cat-api">API</span><span class="card-audience">Everyone</span></div>
           <div class="card-status" role="status"><span class="card-status-dot" aria-hidden="true"></span>Available</div>
         </div>
         <div class="card-title">API Chile</div>
@@ -517,7 +528,7 @@
 
       <a class="card" href="https://sunat-peru-api.cfapps.us10.hana.ondemand.com/app/" target="_blank" rel="noopener" data-search="api peru sunat taxpayer business">
         <div class="card-row1">
-          <div class="card-left"><span class="card-cat cat-api">API</span></div>
+          <div class="card-left"><span class="card-cat cat-api">API</span><span class="card-audience">Everyone</span></div>
           <div class="card-status" role="status"><span class="card-status-dot" aria-hidden="true"></span>Available</div>
         </div>
         <div class="card-title">API Peru</div>
@@ -530,7 +541,7 @@
 
       <a class="card" href="https://camara-colombia-api.cfapps.us10.hana.ondemand.com/app/" target="_blank" rel="noopener" data-search="api colombia camara comercio company registry">
         <div class="card-row1">
-          <div class="card-left"><span class="card-cat cat-api">API</span></div>
+          <div class="card-left"><span class="card-cat cat-api">API</span><span class="card-audience">Everyone</span></div>
           <div class="card-status" role="status"><span class="card-status-dot" aria-hidden="true"></span>Available</div>
         </div>
         <div class="card-title">API Colombia</div>
@@ -543,7 +554,7 @@
 
       <a class="card" href="https://api-mexico.cfapps.us10.hana.ondemand.com/app/" target="_blank" rel="noopener" data-search="api mexico sat tax identity business">
         <div class="card-row1">
-          <div class="card-left"><span class="card-cat cat-api">API</span></div>
+          <div class="card-left"><span class="card-cat cat-api">API</span><span class="card-audience">Everyone</span></div>
           <div class="card-status" role="status"><span class="card-status-dot" aria-hidden="true"></span>Available</div>
         </div>
         <div class="card-title">API Mexico</div>
@@ -556,7 +567,7 @@
 
       <a class="card" href="https://api-brasil-approuter.cfapps.us10.hana.ondemand.com/app/" target="_blank" rel="noopener" data-search="api brasil brazil receita federal cnpj tax identity business">
         <div class="card-row1">
-          <div class="card-left"><span class="card-cat cat-api">API</span></div>
+          <div class="card-left"><span class="card-cat cat-api">API</span><span class="card-audience">Everyone</span></div>
           <div class="card-status" role="status"><span class="card-status-dot" aria-hidden="true"></span>Available</div>
         </div>
         <div class="card-title">API Brasil</div>
@@ -581,7 +592,7 @@
 
       <a class="card" href="https://agente-empresas-chile-ui.cfapps.us10.hana.ondemand.com/" target="_blank" rel="noopener" data-search="agente ia chile empresas inteligencia artificial company intelligence">
         <div class="card-row1">
-          <div class="card-left"><span class="card-cat cat-intel">Intelligence</span></div>
+          <div class="card-left"><span class="card-cat cat-intel">Intelligence</span><span class="card-audience">Everyone</span></div>
           <div class="card-status" role="status"><span class="card-status-dot" aria-hidden="true"></span>Available</div>
         </div>
         <div class="card-title">Chile Company Agent</div>
@@ -645,7 +656,7 @@
       <a class="card" href="https://email-validator.cfapps.us10.hana.ondemand.com" target="_blank" rel="noopener" data-search="email validator data quality verify">
         <div class="card-row1">
           <div class="card-left"><span class="card-cat cat-tool">Tool</span></div>
-          <div class="card-status" role="status"><span class="card-status-dot" aria-hidden="true"></span>Available</div>
+          <div class="card-status in-progress" role="status"><span class="card-status-dot dot-blue" aria-hidden="true"></span>In Progress</div>
         </div>
         <div class="card-title">Email Validator</div>
         <div class="card-desc">Validate and verify email addresses for customer data quality assurance.</div>
@@ -658,7 +669,7 @@
       <a class="card" href="https://customer-office-frontend.cfapps.us10.hana.ondemand.com" target="_blank" rel="noopener" data-search="customer office portal operations team">
         <div class="card-row1">
           <div class="card-left"><span class="card-cat cat-portal">Portal</span></div>
-          <div class="card-status" role="status"><span class="card-status-dot" aria-hidden="true"></span>Available</div>
+          <div class="card-status on-hold" role="status"><span class="card-status-dot dot-orange" aria-hidden="true"></span>On Hold</div>
         </div>
         <div class="card-title">Customer Office Portal</div>
         <div class="card-desc">Central operations portal for the Customer Data team.</div>
@@ -684,7 +695,7 @@
       <a class="card" href="https://sap-check-urls.cfapps.us10.hana.ondemand.com" target="_blank" rel="noopener" data-search="check urls monitor availability health endpoints sap">
         <div class="card-row1">
           <div class="card-left"><span class="card-cat cat-tool">Tool</span></div>
-          <div class="card-status" role="status"><span class="card-status-dot" aria-hidden="true"></span>Available</div>
+          <div class="card-status in-progress" role="status"><span class="card-status-dot dot-blue" aria-hidden="true"></span>In Progress</div>
         </div>
         <div class="card-title">SAP Check URLs</div>
         <div class="card-desc">Monitor availability and health of SAP service endpoints.</div>
